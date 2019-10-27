@@ -4,8 +4,8 @@ import { GraphQLModule } from "@nestjs/graphql"
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CompanyModule } from './business_units/company/company.module';
-import { CurrencyModule } from './business_units/currency/currency.module';
+import { CompanyModule } from './domains/company/company.module';
+import { CurrencyModule } from './domains/currency/currency.module';
 
 @Module({
   imports: [

@@ -4,6 +4,7 @@ import { CurrencyEntity } from './currency.entity';
 import { DeleteResult, getRepository, Repository, UpdateResult } from 'typeorm';
 import { CurrencyDTO } from './currency.dto';
 import { CreateCurrencyDto } from "./dto/create-currency.dto"
+import { UpdateCurrencyDto } from "./dto/update-currency.dto"
 
 @Injectable() 
 export class CurrencyService {
@@ -18,7 +19,12 @@ export class CurrencyService {
     return currency
   }
 
-  async getCurrency (): Promise<CurrencyEntity[]> {
+  async updateCurrency (id: number, dto: UpdateCurrencyDto): Promise<UpdateResult> {
+    console.log(id, dto)
+    return this.CurrencyRepository.update(id, dto);
+  }
+
+  async getCurrency () {
     return await this.CurrencyRepository.find()
   }
 }

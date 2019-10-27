@@ -1,8 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
+import { ParseIntPipe } from "@nestjs/common"
+
 import { CurrencyEntity } from './currency.entity'
-import { CreateCurrencyDto } from './dto/create-currency.dto'
 import { CurrencyService } from './currency.service'
-import { inputCurrency } from './inputs/currency.input'
+import { CreateCurrencyDto } from './dto/create-currency.dto'
+import { UpdateCurrencyDto } from './dto/update-currency.dto'
+import { NewCurrencyInput } from './dto/new-currency.input'
 
 @Resolver((of) => CurrencyEntity)
 export class CurrencyResolver {
@@ -14,7 +17,12 @@ export class CurrencyResolver {
   }
 
   @Mutation(() => CreateCurrencyDto)
-  async createCurrency (@Args('data') data: inputCurrency) {
+  async createCurrency (@Args('data') data: NewCurrencyInput) {
     return this.currencyService.createCurrency(data)
+  }
+
+  @Mutation(() => CreateCurrencyDto)
+  async updateCurrency (@Args('id', ParseIntPipe) id: number, @Args('data') data: UpdateCurrencyDto) {
+    return this.currencyService.updateCurrency(id, data)
   }
 }

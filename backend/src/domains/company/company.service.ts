@@ -7,10 +7,10 @@ import { CurrencyDTO } from '../currency/currency.dto';
 
 @Injectable()
 export class CompanyService {
-  constructor(@InjectRepository(CompanyEntity) private readonly repo: Repository<CompanyEntity>) { }
+  constructor(@InjectRepository(CompanyEntity) private readonly CompanyRepository: Repository<CompanyEntity>) { }
 
   public async getAll(): Promise<CompanyDTO[]> {
-    return await this.repo.find({ relations: ['currency'] })
+    return await this.CompanyRepository.find({ relations: ['currency'] })
       .then(items => items.map(e => CompanyDTO.fromEntity(e)));
   }
 
@@ -24,15 +24,15 @@ export class CompanyService {
   }
 
   public async create(dto: CompanyDTO): Promise<CompanyDTO> {
-    return await this.repo.save(dto)
+    return await this.CompanyRepository.save(dto)
       .then(e => CompanyDTO.fromEntity(e));
   }
 
   public async update(dto: CompanyDTO): Promise<UpdateResult> {
-    return await this.repo.update(dto.id, dto);
+    return await this.CompanyRepository.update(dto.id, dto);
   }
 
   public async delete(id: number): Promise<DeleteResult> {
-    return await this.repo.delete(id);
+    return await this.CompanyRepository.delete(id);
   }
 }

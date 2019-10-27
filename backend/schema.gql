@@ -8,18 +8,19 @@ type CreateCurrencyDto {
   name: String!
 }
 
-input CurrencyInput {
-  name: String!
-}
-
-input inputCurrency {
-  name: String!
-}
-
 type Mutation {
-  createCurrency(data: inputCurrency!): CreateCurrencyDto!
+  createCurrency(data: NewCurrencyInput!): CreateCurrencyDto!
+  updateCurrency(data: UpdateCurrencyDto!, id: Float!): CreateCurrencyDto!
+}
+
+input NewCurrencyInput {
+  name: String!
 }
 
 type Query {
   currency: [CreateCurrencyDto!]!
+}
+
+input UpdateCurrencyDto {
+  name: String!
 }
