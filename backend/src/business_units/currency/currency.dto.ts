@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNumber, IsString, IsUUID } from 'class-validator';
-import { Currency } from '../../entity/Currency';
+import { CurrencyEntity } from './currency.entity';
 
 export class CurrencyDTO implements Readonly<CurrencyDTO> {
   @ApiModelProperty({ required: true })
@@ -19,15 +19,15 @@ export class CurrencyDTO implements Readonly<CurrencyDTO> {
     return obj;
   }
 
-  public static fromEntity(entity: Currency) {
+  public static fromEntity(entity: CurrencyEntity) {
     return this.from({
       id: entity.id,
       name: entity.name,
     });
   }
 
-  public toEntity(): Currency {
-    const obj = new Currency();
+  public toEntity(): CurrencyEntity {
+    const obj = new CurrencyEntity();
     obj.id = this.id;
     obj.name = this.name;
     return obj;

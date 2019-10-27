@@ -1,13 +1,13 @@
 import { Injectable, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Company } from '../../entity/company';
+import { CompanyEntity } from './company.entity';
 import { DeleteResult, getRepository, Repository, UpdateResult } from 'typeorm';
 import { CompanyDTO } from './company.dto';
 import { CurrencyDTO } from '../currency/currency.dto';
 
 @Injectable()
 export class CompanyService {
-  constructor(@InjectRepository(Company) private readonly repo: Repository<Company>) { }
+  constructor(@InjectRepository(CompanyEntity) private readonly repo: Repository<CompanyEntity>) { }
 
   public async getAll(): Promise<CompanyDTO[]> {
     return await this.repo.find({ relations: ['currency'] })
@@ -15,7 +15,7 @@ export class CompanyService {
   }
 
   public async findById(id: number): Promise<CompanyDTO> {
-    return await getRepository(Company)
+    return await getRepository(CompanyEntity)
                     .createQueryBuilder('company')
                     .leftJoinAndSelect('company.currency', 'currency')
                     .where('company.id = :id', { id })
