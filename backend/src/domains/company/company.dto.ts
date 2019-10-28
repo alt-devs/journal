@@ -3,7 +3,7 @@ import { IsEmail, IsString} from 'class-validator';
 import { CompanyEntity } from './company.entity';
 import { CurrencyEntity } from '../currency/currency.entity';
 
-export class CompanyDTO implements Readonly<CompanyDTO> {
+export class CompanyDto implements Readonly<CompanyDto> {
   @ApiModelProperty({ required: true })
 //  @IsUUID()
   id: number;
@@ -29,8 +29,8 @@ export class CompanyDTO implements Readonly<CompanyDTO> {
   @IsString()
   description: string;
 
-  public static from(dto: Partial<CompanyDTO>) {
-    const obj = new CompanyDTO();
+  public static from(dto: Partial<CompanyDto>) {
+    const obj = new CompanyDto();
     obj.id = dto.id;
     obj.name = dto.name;
     obj.currency = dto.currency;

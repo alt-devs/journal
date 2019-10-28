@@ -12,8 +12,8 @@ export class CurrencyResolver {
   constructor (private readonly currencyService: CurrencyService) {}
 
   @Query(() => [ CreateCurrencyDto ])
-  async currency () {
-    return this.currencyService.getCurrency()
+  async currencies () {
+    return this.currencyService.getCurrencies()
   }
 
   @Mutation(() => CreateCurrencyDto)
@@ -25,4 +25,10 @@ export class CurrencyResolver {
   async updateCurrency (@Args('id', ParseIntPipe) id: number, @Args('data') data: UpdateCurrencyDto) {
     return this.currencyService.updateCurrency(id, data)
   }
+
+  @Mutation(returns => Boolean)
+  async removeCurrency(@Args('id', ParseIntPipe) id: number) {
+    return this.currencyService.removeCurrency(id);
+  }
+
 }

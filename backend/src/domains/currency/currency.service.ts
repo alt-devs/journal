@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { CurrencyEntity } from './currency.entity';
-import { DeleteResult, getRepository, Repository, UpdateResult } from 'typeorm';
-import { CurrencyDTO } from './currency.dto';
 import { CreateCurrencyDto } from "./dto/create-currency.dto"
 import { UpdateCurrencyDto } from "./dto/update-currency.dto"
 
@@ -19,16 +19,22 @@ export class CurrencyService {
     return currency
   }
 
-  async updateCurrency (id: number, dto: UpdateCurrencyDto): Promise<UpdateResult> {
-    console.log(id, dto)
-    return this.CurrencyRepository.update(id, dto);
+  async updateCurrency (id: number, dto: UpdateCurrencyDto): Promise<CurrencyEntity> {
+    await this.CurrencyRepository.update(id, {...dto});
+    return this.CurrencyRepository.findOne(id)
   }
 
-  async getCurrency () {
+  async removeCurrency (id: number): Promise<Boolean> {
+    const result = await this.CurrencyRepository.delete(id)
+    return !!result.affected;
+  }
+
+  async getCurrencies () {
     return await this.CurrencyRepository.find()
   }
 }
 
+// TODO: Stayed as an example. Remove later
 // @Injectable()
 // export class CurrencyService {
 //   constructor(@InjectRepository(CurrencyEntity) private readonly repo: Repository<CurrencyEntity>) { }

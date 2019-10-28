@@ -3,14 +3,44 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type CompanyDto {
+  id: Float
+  name: String
+  email: String
+  photoPath: String
+  description: String
+  id_currency: Float
+}
+
+type CreateCompanyDto {
+  id: Float!
+  name: String!
+  email: String!
+  photoPath: String
+  description: String
+  id_currency: Float
+}
+
 type CreateCurrencyDto {
   id: Float!
   name: String!
 }
 
 type Mutation {
+  createCompany(data: NewCompanyInput!): CompanyDto!
+  updateCompany(data: UpdateCompanyDto!, id: Float!): CompanyDto!
+  removeCompany(id: Float!): Boolean!
   createCurrency(data: NewCurrencyInput!): CreateCurrencyDto!
   updateCurrency(data: UpdateCurrencyDto!, id: Float!): CreateCurrencyDto!
+  removeCurrency(id: Float!): Boolean!
+}
+
+input NewCompanyInput {
+  name: String!
+  email: String!
+  photoPath: String
+  description: String
+  id_currency: Float
 }
 
 input NewCurrencyInput {
@@ -18,7 +48,16 @@ input NewCurrencyInput {
 }
 
 type Query {
-  currency: [CreateCurrencyDto!]!
+  companies: [CompanyDto!]!
+  currencies: [CreateCurrencyDto!]!
+}
+
+input UpdateCompanyDto {
+  name: String
+  email: String
+  photoPath: String
+  description: String
+  id_currency: Float
 }
 
 input UpdateCurrencyDto {
