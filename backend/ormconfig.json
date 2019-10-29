@@ -1,16 +1,16 @@
 {
   "type": "postgres",
   "host": "localhost",
-  "port": 5432,
+  "port": 5433,
   "username": "postgres",
-  "password": "8643242",
+  "password": "postgres",
   "database": "journal",
   "synchronize": false,
   "migrationsRun": true,
   "logging": false,
   "migrationsTableName": "migration_table",
   "entities": [
-    "dist/entity/**/*.js"
+    "dist/domains/**/*.js"
   ],
   "migrations": [
     "dist/migration/*.js"
@@ -19,7 +19,7 @@
     "dist/subscriber/**/*.js"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
+    "entitiesDir": "src/entity/domains/**",
     "migrationsDir": "src/migration",
     "subscribersDir": "src/subscriber"
   }

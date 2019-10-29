@@ -1,14 +1,14 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import Currency from './Currency';
+import { CurrencyEntity } from '../currency/currency.entity';
 
-@Entity()
-export class Company {
+@Entity("company")
+export class CompanyEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @OneToOne(type => Currency)
+  @OneToOne(type => CurrencyEntity)
   @JoinColumn({ name: 'id_currency' })
-  currency: Currency;
+  currency: CurrencyEntity;
 
   @Column({ length: 100 })
   public name: string;
@@ -22,5 +22,3 @@ export class Company {
   @Column({ length: 1024 })
   public description: string;
 }
-
-export default Company;

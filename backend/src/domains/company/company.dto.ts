@@ -1,16 +1,16 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsEmail, IsString} from 'class-validator';
-import { Company } from '../../entity/company';
-import Currency from '../../entity/Currency';
+import { CompanyEntity } from './company.entity';
+import { CurrencyEntity } from '../currency/currency.entity';
 
-export class CompanyDTO implements Readonly<CompanyDTO> {
+export class CompanyDto implements Readonly<CompanyDto> {
   @ApiModelProperty({ required: true })
 //  @IsUUID()
   id: number;
 
   @ApiModelProperty()
   // @IsString()
-  currency: Currency;
+  currency: CurrencyEntity;
 
   @ApiModelProperty({ required: true })
   @IsString()
@@ -29,8 +29,8 @@ export class CompanyDTO implements Readonly<CompanyDTO> {
   @IsString()
   description: string;
 
-  public static from(dto: Partial<CompanyDTO>) {
-    const obj = new CompanyDTO();
+  public static from(dto: Partial<CompanyDto>) {
+    const obj = new CompanyDto();
     obj.id = dto.id;
     obj.name = dto.name;
     obj.currency = dto.currency;
@@ -40,7 +40,7 @@ export class CompanyDTO implements Readonly<CompanyDTO> {
     return obj;
   }
 
-  public static fromEntity(entity: Company) {
+  public static fromEntity(entity: CompanyEntity) {
     return this.from({
       id: entity.id,
       name: entity.name,
@@ -52,7 +52,7 @@ export class CompanyDTO implements Readonly<CompanyDTO> {
   }
 
   public toEntity(/*user: User = null*/) {
-    const obj = new Company();
+    const obj = new CompanyEntity();
     obj.id = this.id;
     obj.name = this.name;
     obj.currency = this.currency;
