@@ -1,8 +1,9 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CurrencyEntity } from '../currency/currency.entity';
+import {BaseEntity} from "../base.entity";
 
-@Entity("company")
-export class CompanyEntity {
+@Entity("companies")
+export class CompanyEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 

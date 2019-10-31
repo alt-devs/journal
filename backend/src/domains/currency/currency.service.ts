@@ -14,6 +14,10 @@ export class CurrencyService {
     let currency = new CurrencyEntity()
     currency.name = data.name;
 
+    // TODO: The stub. Instead of "1", we must to substitute the id of the real user
+    currency.createdBy = 1;
+    currency.updatedBy = 1;
+
     await this.CurrencyRepository.save(currency)
 
     return currency
