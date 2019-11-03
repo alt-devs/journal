@@ -4,7 +4,6 @@ import { ParseIntPipe } from "@nestjs/common"
 import { CompanyEntity } from './company.entity'
 import { CompanyService } from './company.service'
 import { CompanyDto } from './dto/company.dto'
-import { CreateCompanyDto } from './dto/create-company.dto'
 import { UpdateCompanyDto } from './dto/update-company.dto'
 import { NewCompanyInput } from './dto/new-company.input'
 
