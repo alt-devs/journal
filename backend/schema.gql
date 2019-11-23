@@ -26,6 +26,25 @@ type CreateCurrencyDto {
   name: String!
 }
 
+type CreateUserDto {
+  id: Float!
+  login: String!
+  password: String!
+  lastActive: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CurrencyDto {
+  id: Float
+  name: String
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type Mutation {
   createCompany(data: NewCompanyInput!): CompanyDto!
   updateCompany(data: UpdateCompanyDto!, id: Float!): CompanyDto!
@@ -33,6 +52,9 @@ type Mutation {
   createCurrency(data: NewCurrencyInput!): CreateCurrencyDto!
   updateCurrency(data: UpdateCurrencyDto!, id: Float!): CreateCurrencyDto!
   removeCurrency(id: Float!): Boolean!
+  createUser(data: NewUserInput!): UserDto!
+  updateUser(data: UpdateUserDto!, id: Float!): UserDto!
+  removeUser(id: Float!): Boolean!
 }
 
 input NewCompanyInput {
@@ -47,9 +69,15 @@ input NewCurrencyInput {
   name: String!
 }
 
+input NewUserInput {
+  login: String!
+  password: String!
+}
+
 type Query {
   companies: [CompanyDto!]!
   currencies: [CreateCurrencyDto!]!
+  users: [UserDto!]!
 }
 
 input UpdateCompanyDto {
@@ -62,4 +90,17 @@ input UpdateCompanyDto {
 
 input UpdateCurrencyDto {
   name: String!
+}
+
+input UpdateUserDto {
+  password: String!
+}
+
+type UserDto {
+  id: Float
+  login: String
+  password: String
+  lastActive: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
 }

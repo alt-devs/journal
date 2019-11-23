@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompanyModule } from './domains/company/company.module';
 import { CurrencyModule } from './domains/currency/currency.module';
+import { UserModule } from './domains/user/user.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { CurrencyModule } from './domains/currency/currency.module';
     GraphQLModule.forRoot({
       autoSchemaFile: "schema.gql",
     }),
-    CompanyModule, CurrencyModule,
+    CompanyModule, CurrencyModule, UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

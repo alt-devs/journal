@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# editor configs
+.vscode
+
 # next.js
 /.next/
 /out/
@@ -24,3 +27,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea
