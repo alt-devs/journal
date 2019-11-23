@@ -2,6 +2,6 @@ import { Field, InputType } from "type-graphql"
 
 @InputType()
 export class UpdateUserDto {
-  @Field() 
-  password?: string;
+  @Field()
+  password?: string
 }

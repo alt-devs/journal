@@ -4,10 +4,10 @@ import { Field, InputType } from "type-graphql"
 @InputType()
 export class NewUserInput {
   @MaxLength(50)
-  @Field({ nullable: false }) 
-  public login: string;
+  @Field({ nullable: false })
+  public login: string
 
   @MaxLength(100)
   @Field({ nullable: false })
-  public password: string;
+  public password: string
 }

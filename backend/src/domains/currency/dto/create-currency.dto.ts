@@ -1,7 +1,7 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export class CreateCurrencyDto {
-  @Field() readonly id?: number;
-  @Field() name?: string;
+  @Field() readonly id?: number
+  @Field() name?: string
 }

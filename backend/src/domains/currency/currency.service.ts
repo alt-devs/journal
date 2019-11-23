@@ -1,39 +1,45 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common"
+import { InjectRepository } from "@nestjs/typeorm"
+import { Repository } from "typeorm"
 
-import { CurrencyEntity } from './currency.entity';
+import { CurrencyEntity } from "./currency.entity"
 import { CreateCurrencyDto } from "./dto/create-currency.dto"
 import { UpdateCurrencyDto } from "./dto/update-currency.dto"
 
-@Injectable() 
+@Injectable()
 export class CurrencyService {
-  constructor(@InjectRepository(CurrencyEntity) private readonly CurrencyRepository: Repository<CurrencyEntity>) { }
+  constructor(
+    @InjectRepository(CurrencyEntity)
+    private readonly CurrencyRepository: Repository<CurrencyEntity>,
+  ) {}
 
-  async createCurrency (data: CreateCurrencyDto): Promise<CurrencyEntity> {
-    let currency = new CurrencyEntity()
-    currency.name = data.name;
+  async createCurrency(data: CreateCurrencyDto): Promise<CurrencyEntity> {
+    const currency = new CurrencyEntity()
+    currency.name = data.name
 
     // TODO: The stub. Instead of "1", we must to substitute the id of the real user
-    currency.createdBy = 1;
-    currency.updatedBy = 1;
+    currency.createdBy = 1
+    currency.updatedBy = 1
 
     await this.CurrencyRepository.save(currency)
 
     return currency
   }
 
-  async updateCurrency (id: number, dto: UpdateCurrencyDto): Promise<CurrencyEntity> {
-    await this.CurrencyRepository.update(id, {...dto});
+  async updateCurrency(
+    id: number,
+    dto: UpdateCurrencyDto,
+  ): Promise<CurrencyEntity> {
+    await this.CurrencyRepository.update(id, { ...dto })
     return this.CurrencyRepository.findOne(id)
   }
 
-  async removeCurrency (id: number): Promise<Boolean> {
+  async removeCurrency(id: number): Promise<boolean> {
     const result = await this.CurrencyRepository.delete(id)
-    return !!result.affected;
+    return !!result.affected
   }
 
-  async getCurrencies () {
+  async getCurrencies() {
     return await this.CurrencyRepository.find()
   }
 }

@@ -1,20 +1,28 @@
-import { Injectable, Param } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, Param } from "@nestjs/common"
+import { InjectRepository } from "@nestjs/typeorm"
 
-import { CompanyEntity } from './company.entity';
-import { DeleteResult, getRepository, Repository, UpdateResult } from 'typeorm';
+import { CompanyEntity } from "./company.entity"
+import { DeleteResult, getRepository, Repository, UpdateResult } from "typeorm"
 // import { CompanyDTO } from './company.dto';
 // import { CurrencyDTO } from '../currency/currency.dto';
 
 import { CreateCompanyDto } from "./dto/create-company.dto"
 import { UpdateCompanyDto } from "./dto/update-company.dto"
 
-
-@Injectable() 
+@Injectable()
 export class CompanyService {
-  constructor(@InjectRepository(CompanyEntity) private readonly CompanyRepository: Repository<CompanyEntity>) { }
+  constructor(
+    @InjectRepository(CompanyEntity)
+    private readonly CompanyRepository: Repository<CompanyEntity>,
+  ) {}
 
-  async createCompany ({name, email, photoPath, description, id_currency}: CreateCompanyDto): Promise<CompanyEntity> {
+  async createCompany({
+    name,
+    email,
+    photoPath,
+    description,
+    id_currency,
+  }: CreateCompanyDto): Promise<CompanyEntity> {
     const newCompany = new CompanyEntity()
     newCompany.name = name
     newCompany.email = email
@@ -22,22 +30,25 @@ export class CompanyService {
     newCompany.description = description
     // FIXME
     // newCompany.currency = id_currency
-    
+
     await this.CompanyRepository.save(newCompany)
     return newCompany
   }
 
-  async updateCompany (id: number, dto: UpdateCompanyDto): Promise<CompanyEntity> {
-    await this.CompanyRepository.update(id, {...dto});
+  async updateCompany(
+    id: number,
+    dto: UpdateCompanyDto,
+  ): Promise<CompanyEntity> {
+    await this.CompanyRepository.update(id, { ...dto })
     return this.CompanyRepository.findOne(id)
   }
 
-  async removeCompany (id: number): Promise<Boolean> {
+  async removeCompany(id: number): Promise<boolean> {
     const result = await this.CompanyRepository.delete(id)
-    return !!result.affected;
+    return !!result.affected
   }
 
-  async getCompanies () {
+  async getCompanies() {
     return await this.CompanyRepository.find()
   }
 }

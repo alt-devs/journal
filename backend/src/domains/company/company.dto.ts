@@ -1,43 +1,43 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsEmail, IsString} from 'class-validator';
-import { CompanyEntity } from './company.entity';
-import { CurrencyEntity } from '../currency/currency.entity';
+import { ApiModelProperty } from "@nestjs/swagger"
+import { IsEmail, IsString } from "class-validator"
+import { CompanyEntity } from "./company.entity"
+import { CurrencyEntity } from "../currency/currency.entity"
 
 export class CompanyDto implements Readonly<CompanyDto> {
   @ApiModelProperty({ required: true })
-//  @IsUUID()
-  id: number;
+  //  @IsUUID()
+  id: number
 
   @ApiModelProperty()
   // @IsString()
-  currency: CurrencyEntity;
+  currency: CurrencyEntity
 
   @ApiModelProperty({ required: true })
   @IsString()
-  name: string;
+  name: string
 
   @ApiModelProperty({ required: true })
   @IsString()
   @IsEmail()
-  email: string;
+  email: string
 
   @ApiModelProperty()
   @IsString()
-  photoPath: string;
+  photoPath: string
 
   @ApiModelProperty()
   @IsString()
-  description: string;
+  description: string
 
   public static from(dto: Partial<CompanyDto>) {
-    const obj = new CompanyDto();
-    obj.id = dto.id;
-    obj.name = dto.name;
-    obj.currency = dto.currency;
-    obj.email = dto.email;
-    obj.photoPath = dto.photoPath;
-    obj.description = dto.description;
-    return obj;
+    const obj = new CompanyDto()
+    obj.id = dto.id
+    obj.name = dto.name
+    obj.currency = dto.currency
+    obj.email = dto.email
+    obj.photoPath = dto.photoPath
+    obj.description = dto.description
+    return obj
   }
 
   public static fromEntity(entity: CompanyEntity) {
@@ -48,17 +48,17 @@ export class CompanyDto implements Readonly<CompanyDto> {
       email: entity.email,
       photoPath: entity.photoPath,
       description: entity.description,
-    });
+    })
   }
 
   public toEntity(/*user: User = null*/) {
-    const obj = new CompanyEntity();
-    obj.id = this.id;
-    obj.name = this.name;
-    obj.currency = this.currency;
-    obj.email = this.email;
-    obj.photoPath = this.photoPath;
-    obj.description = this.description;
-    return obj;
+    const obj = new CompanyEntity()
+    obj.id = this.id
+    obj.name = this.name
+    obj.currency = this.currency
+    obj.email = this.email
+    obj.photoPath = this.photoPath
+    obj.description = this.description
+    return obj
   }
 }

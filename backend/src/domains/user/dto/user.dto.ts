@@ -1,24 +1,24 @@
 import { MaxLength } from "class-validator"
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export class UserDto {
-  @Field({ nullable: true }) public id?: number;
+  @Field({ nullable: true }) public id?: number
 
   @MaxLength(40)
   @Field({ nullable: true })
-  public login?: string;
+  public login?: string
 
   @MaxLength(100)
   @Field({ nullable: true })
-  public password?: string;
+  public password?: string
 
   @Field({ nullable: true })
-  public lastActive?: Date;
+  public lastActive?: Date
 
   @Field({ nullable: true })
-  public createdAt?: Date;
+  public createdAt?: Date
 
   @Field({ nullable: true })
-  public updatedAt?: Date;
+  public updatedAt?: Date
 }

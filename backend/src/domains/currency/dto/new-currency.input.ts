@@ -4,6 +4,6 @@ import { Field, InputType } from "type-graphql"
 @InputType()
 export class NewCurrencyInput {
   @MaxLength(50)
-  @Field() 
-  readonly name?: string;
+  @Field()
+  readonly name?: string
 }
