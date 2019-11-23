@@ -10,3 +10,4 @@ import { CurrencyResolver } from "./currency.resolver";
   exports: [],
 })
 export class CurrencyModule { }
+ 
